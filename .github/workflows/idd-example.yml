@@ -36,7 +36,7 @@ jobs:
         run: |
           wget https://github.com/whitehatsec/vantage-prevent-distributions/releases/latest/download/VantagePrevent.deb          
           sudo apt-get install -f ./VantagePrevent.deb
-          sudo dast-attacker-cli -init -license-key=${{ secrets.LICENSE_KEY }} 
+          sudo dast-attacker-cli -init -license-key=${{ secrets.VANTAGE_LICENSE_KEY }} 
           sudo dast-attacker-cli -output-json=results.json -output-html=results.html .scan/*.har
 
       - name: "upload scan results"
@@ -52,8 +52,8 @@ jobs:
         with:
           name: IDD Scan Report
           path: results.html
-      - name: "create issue"
-        if: ${{ always() }}
-        uses: JasonEtco/create-an-issue@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       - name: "create issue"
+#         if: ${{ always() }}
+#         uses: JasonEtco/create-an-issue@v2
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
