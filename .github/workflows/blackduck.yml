@@ -25,14 +25,16 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+        
     - name: BlackDuck Scan
-      uses: blackducksoftware/github-action@v2
+      uses: blackducksoftware/github-action@9ea442b34409737f64743781e9adc71fd8e17d38
       with:
-        args: --detect.project.name=bwapp-master --detect.tools.excluded="DETECTOR" --blackduck.trust.cert=true --detect.risk.report.pdf=true --detect.project.version.name=1
+        args: '--blackduck.url="${{BLACKDUCK_URL}}" --blackduck.api.token="${{BLACKDUCK_API_TOKEN}}" --detect.tools="SIGNATURE_SCAN,DETECTOR"'
+        #args: --detect.project.name=bwapp-master --detect.tools.excluded="DETECTOR" --blackduck.trust.cert=true --detect.risk.report.pdf=true --detect.project.version.name=1
       
-    - run: ls 
-    - name: Upload Results
-      uses: actions/upload-artifact@v2
-      with:
-        name: Blackduck
-        path: /home/runner/work/insecure-bank/insecure-bank
+   # - run: ls 
+#     - name: Upload Results
+#       uses: actions/upload-artifact@v2
+#       with:
+#         name: Blackduck
+#         path: /home/runner/work/insecure-bank/insecure-bank
